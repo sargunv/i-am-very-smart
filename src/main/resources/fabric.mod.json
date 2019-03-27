@@ -1,0 +1,20 @@
+{
+    "id": "iamverysmart",
+    "version": "${version}",
+    "name": "I Am Very Smart",
+    "description": "Disable tutorial hints and unlock all recipes.",
+    "authors": [
+        "sargunv"
+    ],
+    "license": "Apache-2.0",
+    "icon": "assets/iamverysmart/icon.png",
+    "side": "universal",
+    "initializers": [],
+    "requires": {
+        "fabric": "*"
+    },
+    "mixins": {
+        "client": "iamverysmart.client.json",
+        "common": "iamverysmart.common.json"
+    }
+}

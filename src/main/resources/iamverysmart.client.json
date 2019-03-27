@@ -1,0 +1,12 @@
+{
+    "required": true,
+    "package": "me.sargunvohra.mcmods.iamverysmart",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "RecipeToastMixin",
+        "TutorialToastMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
