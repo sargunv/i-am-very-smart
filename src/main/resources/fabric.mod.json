@@ -10,6 +10,7 @@
     "icon": "assets/iamverysmart/icon.png",
     "side": "universal",
     "initializers": [
+        "me.sargunvohra.mcmods.iamverysmart.IAmVerySmart",
         "me.sargunvohra.mcmods.iamverysmart.IAmVerySmartClient"
     ],
     "requires": {

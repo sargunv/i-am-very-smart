@@ -1,6 +1,7 @@
 package me.sargunvohra.mcmods.iamverysmart.mixin;
 
-import java.util.ArrayList;
+import java.util.stream.Collectors;
+import me.sargunvohra.mcmods.iamverysmart.config.ReloadListener;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -14,6 +15,13 @@ public abstract class PlayerManagerMixin {
 
   @Inject(at = @At("RETURN"), method = "onPlayerConnect")
   private void unlockRecipes(ClientConnection con, ServerPlayerEntity player, CallbackInfo ci) {
-    player.unlockRecipes(new ArrayList<>(player.server.getRecipeManager().values()));
+    player.unlockRecipes(
+        player
+            .server
+            .getRecipeManager()
+            .values()
+            .stream()
+            .filter(recipe -> ReloadListener.INSTANCE.getMatcher().match(recipe.getId()))
+            .collect(Collectors.toList()));
   }
 }
