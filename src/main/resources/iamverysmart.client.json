@@ -1,6 +1,6 @@
 {
     "required": true,
-    "package": "me.sargunvohra.mcmods.iamverysmart",
+    "package": "me.sargunvohra.mcmods.iamverysmart.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
         "RecipeToastMixin",

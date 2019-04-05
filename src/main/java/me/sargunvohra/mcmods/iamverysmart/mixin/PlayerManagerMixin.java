@@ -1,4 +1,4 @@
-package me.sargunvohra.mcmods.iamverysmart;
+package me.sargunvohra.mcmods.iamverysmart.mixin;
 
 import java.util.ArrayList;
 import net.minecraft.network.ClientConnection;
