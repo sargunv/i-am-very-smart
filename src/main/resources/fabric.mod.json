@@ -1,4 +1,5 @@
 {
+    "schemaVersion": 1,
     "id": "iamverysmart",
     "version": "${version}",
     "name": "I Am Very Smart",
@@ -6,18 +7,27 @@
     "authors": [
         "sargunv"
     ],
+    "contact": {
+        "homepage": "https://minecraft.curseforge.com/projects/i-am-very-smart",
+        "sources": "https://gitlab.com/sargunv-mc-mods/i-am-very-smart"
+    },
     "license": "Apache-2.0",
     "icon": "assets/iamverysmart/icon.png",
-    "side": "universal",
-    "initializers": [
-        "me.sargunvohra.mcmods.iamverysmart.IAmVerySmart",
-        "me.sargunvohra.mcmods.iamverysmart.IAmVerySmartClient"
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "me.sargunvohra.mcmods.iamverysmart.IAmVerySmart"
+        ],
+        "client": [
+            "me.sargunvohra.mcmods.iamverysmart.IAmVerySmartClient"
+        ]
+    },
+    "mixins": [
+        "iamverysmart.client.json",
+        "iamverysmart.common.json"
     ],
     "requires": {
+        "fabricloader": ">=0.4.0",
         "fabric": "*"
     },
-    "mixins": {
-        "client": "iamverysmart.client.json",
-        "common": "iamverysmart.common.json"
-    }
 }
