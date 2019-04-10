@@ -64,7 +64,6 @@ public class ClientConfigManager {
 
   private void registerConfigButton() {
     if (!FabricLoader.getInstance().isModLoaded("modmenu")) return;
-    if (!FabricLoader.getInstance().isModLoaded("cloth")) return;
     try {
       Class.forName("io.github.prospector.modmenu.api.ModMenuApi")
           .getDeclaredMethod("addConfigOverride", String.class, Runnable.class)

@@ -11,8 +11,6 @@ import net.minecraft.client.gui.Screen;
 @Environment(EnvType.CLIENT)
 class ClientConfigGui {
   static void open(Screen parent, ClientConfig config, Runnable save) {
-    if (!FabricLoader.getInstance().isModLoaded("cloth")) return;
-
     ClientConfig defaults = new ClientConfig();
 
     ClothConfigScreen.Builder builder =
