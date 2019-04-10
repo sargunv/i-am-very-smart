@@ -1,7 +1,8 @@
 {
+    "$schema": "https://gist.githubusercontent.com/MrYurihi/4460e90099cf934b2078c7607bb0562b/raw/3713076d9d16ad66ba00aad3fa525872ab3438af/mod.json",
     "schemaVersion": 1,
     "id": "iamverysmart",
-    "version": "${version}",
+    "version": "%VERSION%",
     "name": "I Am Very Smart",
     "description": "Disable tutorial hints and unlock all recipes.",
     "authors": [
@@ -28,6 +29,7 @@
     ],
     "requires": {
         "fabricloader": ">=0.4.0",
-        "fabric": "*"
-    },
+        "fabric": "*",
+        "cloth-config": ">=0.1.0"
+    }
 }

@@ -17,9 +17,6 @@ minecraft {
 
 repositories {
 	maven {
-		url = "https://jitpack.io"
-	}
-	maven {
 		url = "https://minecraft.curseforge.com/api/maven"
 	}
 }
@@ -32,8 +29,8 @@ dependencies {
 	modCompile "net.fabricmc:fabric:${project.fabric_version}"
 	include "net.fabricmc:fabric:${project.fabric_version}"
 
-	modCompile "cloth-config:Cloth:Config:${project.cloth_version}"
-	include "cloth-config:Cloth:Config:${project.cloth_version}"
+	modCompile "cloth-config:ClothConfig:${project.cloth_version}"
+	include "cloth-config:ClothConfig:${project.cloth_version}"
 }
 
 processResources {
@@ -41,7 +38,7 @@ processResources {
 
 	from(sourceSets.main.resources.srcDirs) {
 		include "fabric.mod.json"
-		expand "version": project.version
+		filter {line -> line.replace("%VERSION%", "${project.version}")}
 	}
 
 	from(sourceSets.main.resources.srcDirs) {
