@@ -10,7 +10,8 @@
     ],
     "contact": {
         "homepage": "https://minecraft.curseforge.com/projects/i-am-very-smart",
-        "sources": "https://gitlab.com/sargunv-mc-mods/i-am-very-smart"
+        "sources": "https://gitlab.com/sargunv-mc-mods/i-am-very-smart",
+        "issues": "https://gitlab.com/sargunv-mc-mods/i-am-very-smart/issues"
     },
     "license": "Apache-2.0",
     "icon": "assets/iamverysmart/icon.png",

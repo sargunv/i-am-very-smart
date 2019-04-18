@@ -11,10 +11,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(TutorialToast.class)
 public abstract class TutorialToastMixin {
 
-  @Inject(at = @At("HEAD"), method = "draw", cancellable = true)
-  private void hideToastInstantly(CallbackInfoReturnable<Toast.Visibility> cir) {
-    if (ClientConfigManager.INSTANCE.getConfig().suppressTutorialNotification) {
-      cir.setReturnValue(Toast.Visibility.HIDE);
+    @Inject(at = @At("HEAD"), method = "draw", cancellable = true)
+    private void hideToastInstantly(CallbackInfoReturnable<Toast.Visibility> cir) {
+        if (ClientConfigManager.INSTANCE.getConfig().suppressTutorialNotification) {
+            cir.setReturnValue(Toast.Visibility.HIDE);
+        }
     }
-  }
 }

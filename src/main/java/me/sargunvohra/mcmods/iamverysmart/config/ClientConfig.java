@@ -5,8 +5,9 @@ import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
 public class ClientConfig {
-  public boolean suppressTutorialNotification = true;
-  public boolean suppressRecipeNotification = true;
+    public boolean suppressTutorialNotification = true;
+    public boolean suppressRecipeNotification = true;
 
-  void validate() {}
+    void validate() {
+    }
 }

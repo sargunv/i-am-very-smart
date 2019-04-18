@@ -1,7 +1,7 @@
 package me.sargunvohra.mcmods.iamverysmart.match;
 
 public enum MatchResult {
-  EXACT,
-  REGEX,
-  NONE
+    EXACT,
+    REGEX,
+    NONE
 }
