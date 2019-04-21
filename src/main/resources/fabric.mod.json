@@ -22,6 +22,9 @@
         ],
         "client": [
             "me.sargunvohra.mcmods.iamverysmart.IAmVerySmartClient"
+        ],
+        "modmenu": [
+            "me.sargunvohra.mcmods.iamverysmart.ModMenuCompat"
         ]
     },
     "mixins": [
@@ -31,6 +34,6 @@
     "requires": {
         "fabricloader": ">=0.4.0",
         "fabric": "*",
-        "cloth-config": ">=0.1.0"
+        "autoconfig": ">=0.2.0"
     }
 }

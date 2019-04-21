@@ -15,9 +15,9 @@ minecraft {
 }
 
 repositories {
-	maven {
-		url = "https://minecraft.curseforge.com/api/maven"
-	}
+	maven { url = "https://maven.fabricmc.net/" }
+	maven { url = "https://minecraft.curseforge.com/api/maven" }
+	maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
 }
 
 dependencies {
@@ -28,8 +28,16 @@ dependencies {
 	modCompile "net.fabricmc:fabric:${project.fabric_version}"
 	include "net.fabricmc:fabric:${project.fabric_version}"
 
+	modCompile "me.sargunvohra.mcmods:auto-config:${project.auto_config_version}"
+	include "me.sargunvohra.mcmods:auto-config:${project.auto_config_version}"
+
 	modCompile "cloth-config:ClothConfig:${project.cloth_config_version}"
 	include "cloth-config:ClothConfig:${project.cloth_config_version}"
+
+	modCompile "io.github.prospector.modmenu:ModMenu:${project.mod_menu_version}"
+
+	// temporary hack until MC-148461 is fixed
+	compile "org.lwjgl:lwjgl-jemalloc:3.2.1"
 }
 
 processResources {
@@ -62,25 +70,4 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 jar {
 	from "LICENSE"
-}
-
-// configure the maven publication
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(jar) {
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-		}
-	}
-
-	// select the repositories you want to publish to
-	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
-	}
 }

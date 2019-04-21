@@ -1,6 +1,6 @@
 {
-    "text.iamverysmart.config.title": "I Am Very Smart",
-    "text.iamverysmart.config.category.general": "General",
-    "text.iamverysmart.config.option.suppressTutorialNotification": "Suppress tutorial notifications",
-    "text.iamverysmart.config.option.suppressRecipeNotification": "Suppress recipe unlock notifications"
+    "text.autoconfig.iamverysmart.title": "I Am Very Smart",
+    "text.autoconfig.iamverysmart.category.general": "General",
+    "text.autoconfig.iamverysmart.option.general.suppressTutorialNotification": "Suppress tutorial notifications",
+    "text.autoconfig.iamverysmart.option.general.suppressRecipeNotification": "Suppress recipe unlock notifications"
 }

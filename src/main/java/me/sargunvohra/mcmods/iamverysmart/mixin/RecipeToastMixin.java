@@ -1,6 +1,7 @@
 package me.sargunvohra.mcmods.iamverysmart.mixin;
 
-import me.sargunvohra.mcmods.iamverysmart.config.ClientConfigManager;
+import me.sargunvohra.mcmods.autoconfig.api.AutoConfig;
+import me.sargunvohra.mcmods.iamverysmart.config.ClientConfig;
 import net.minecraft.client.toast.RecipeToast;
 import net.minecraft.client.toast.Toast;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,7 +14,8 @@ public abstract class RecipeToastMixin {
 
     @Inject(at = @At("HEAD"), method = "draw", cancellable = true)
     private void hideToastInstantly(CallbackInfoReturnable<Toast.Visibility> cir) {
-        if (ClientConfigManager.INSTANCE.getConfig().suppressRecipeNotification) {
+        ClientConfig config = AutoConfig.<ClientConfig>getConfigHolder("iamverysmart").getConfig();
+        if (config.suppressRecipeNotification) {
             cir.setReturnValue(Toast.Visibility.HIDE);
         }
     }
