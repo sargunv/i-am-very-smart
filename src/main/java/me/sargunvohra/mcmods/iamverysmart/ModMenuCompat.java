@@ -1,11 +1,8 @@
 package me.sargunvohra.mcmods.iamverysmart;
 
 import io.github.prospector.modmenu.api.ModMenuApi;
-import me.sargunvohra.mcmods.autoconfig.api.AutoConfig;
-import me.sargunvohra.mcmods.autoconfig.api.serializer.JanksonConfigSerializer;
+import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import me.sargunvohra.mcmods.iamverysmart.config.ClientConfig;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.Screen;
 
 import java.util.Optional;
@@ -21,6 +18,6 @@ public class ModMenuCompat implements ModMenuApi {
 
     @Override
     public Optional<Supplier<Screen>> getConfigScreen(Screen screen) {
-        return Optional.of(AutoConfig.getConfigScreen("iamverysmart", screen));
+        return Optional.of(AutoConfig.getConfigScreen(ClientConfig.class, screen));
     }
 }

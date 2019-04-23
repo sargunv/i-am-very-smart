@@ -1,6 +1,6 @@
 package me.sargunvohra.mcmods.iamverysmart.mixin;
 
-import me.sargunvohra.mcmods.autoconfig.api.AutoConfig;
+import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
 import me.sargunvohra.mcmods.iamverysmart.config.ClientConfig;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.TutorialToast;
@@ -14,7 +14,7 @@ public abstract class TutorialToastMixin {
 
     @Inject(at = @At("HEAD"), method = "draw", cancellable = true)
     private void hideToastInstantly(CallbackInfoReturnable<Toast.Visibility> cir) {
-        ClientConfig config = AutoConfig.<ClientConfig>getConfigHolder("iamverysmart").getConfig();
+        ClientConfig config = AutoConfig.getConfigHolder(ClientConfig.class).getConfig();
         if (config.suppressTutorialNotification) {
             cir.setReturnValue(Toast.Visibility.HIDE);
         }
