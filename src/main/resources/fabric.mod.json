@@ -28,8 +28,7 @@
         ]
     },
     "mixins": [
-        "iamverysmart.client.json",
-        "iamverysmart.common.json"
+        "iamverysmart.mixins.json"
     ],
     "requires": {
         "fabricloader": ">=0.4.0",
