@@ -9,6 +9,6 @@ import net.minecraft.resource.ResourceType;
 public class IAmVerySmart implements ModInitializer {
     @Override
     public void onInitialize() {
-        ResourceManagerHelper.get(ResourceType.DATA).registerReloadListener(ReloadListener.INSTANCE);
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(ReloadListener.INSTANCE);
     }
 }
