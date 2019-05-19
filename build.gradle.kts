@@ -5,19 +5,11 @@ import com.palantir.gradle.gitversion.VersionDetails
 import net.fabricmc.loom.task.RemapJar
 
 val minecraftVersion: String by project
-val yarnMappings: String by project
-val loaderVersion: String by project
-
 val curseProjectId: String by project
 val curseMinecraftVersion: String by project
 val basePackage: String by project
 val modJarBaseName: String by project
 val modMavenGroup: String by project
-
-val fabricVersion: String by project
-val clothConfigVersion: String by project
-val autoConfigVersion: String by project
-val modMenuVersion: String by project
 
 plugins {
     java
@@ -55,24 +47,29 @@ group = modMavenGroup
 minecraft {
 }
 
+configurations {
+    listOf(mappings, modCompile, include, compileOnly).forEach {
+        it {
+            resolutionStrategy.activateDependencyLocking()
+        }
+    }
+}
+
+
 dependencies {
     minecraft("com.mojang:minecraft:$minecraftVersion")
-    mappings("net.fabricmc:yarn:$minecraftVersion+$yarnMappings")
-    modCompile("net.fabricmc:fabric-loader:$loaderVersion")
+    mappings("net.fabricmc:yarn:$minecraftVersion+")
+    modCompile("net.fabricmc:fabric-loader:0.4.+")
 
-    modCompile("net.fabricmc.fabric-api:fabric-api-base:$fabricVersion")
-    include("net.fabricmc.fabric-api:fabric-api-base:$fabricVersion")
+    modCompile("net.fabricmc.fabric-api:fabric-api:0.3.+")
 
-    modCompile("net.fabricmc.fabric-api:fabric-resource-loader:$fabricVersion")
-    include("net.fabricmc.fabric-api:fabric-resource-loader:$fabricVersion")
+    modCompile("cloth-config:ClothConfig:0.2.1.14")
+    modCompile("me.sargunvohra.mcmods:auto-config:1.+")
 
-    modCompile("cloth-config:ClothConfig:$clothConfigVersion")
-    include("cloth-config:ClothConfig:$clothConfigVersion")
+    include("cloth-config:ClothConfig:0.2.1.14")
+    include("me.sargunvohra.mcmods:auto-config:1.+")
 
-    modCompile("me.sargunvohra.mcmods:auto-config:$autoConfigVersion")
-    include("me.sargunvohra.mcmods:auto-config:$autoConfigVersion")
-
-    modCompile("io.github.prospector.modmenu:ModMenu:$modMenuVersion")
+    modCompile("io.github.prospector.modmenu:ModMenu:1.+")
 }
 
 val processResources = tasks.getByName<ProcessResources>("processResources") {
@@ -110,8 +107,8 @@ if (versionDetails().isCleanTag) {
             changelog = file("changelog.txt")
             releaseType = "release"
             addGameVersion(curseMinecraftVersion)
-            relations(closureOf<CurseRelation>{
-                embeddedLibrary("fabric")
+            relations(closureOf<CurseRelation> {
+                requiredDependency("fabric")
                 embeddedLibrary("cloth-config")
                 embeddedLibrary("auto-config")
             })
