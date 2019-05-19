@@ -1,1 +1,1 @@
-debundle fabric api
+Add Chinese translation submitted by the community
