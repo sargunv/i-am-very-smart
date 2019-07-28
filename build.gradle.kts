@@ -2,7 +2,7 @@ import com.matthewprenger.cursegradle.CurseProject
 import com.matthewprenger.cursegradle.CurseRelation
 import com.matthewprenger.cursegradle.Options
 import com.palantir.gradle.gitversion.VersionDetails
-import net.fabricmc.loom.task.RemapJar
+import net.fabricmc.loom.task.RemapJarTask
 
 val minecraftVersion: String by project
 val curseProjectId: String by project
@@ -15,7 +15,7 @@ plugins {
     java
     idea
     `maven-publish`
-    id("fabric-loom") version "0.2.2-SNAPSHOT"
+    id("fabric-loom") version "0.2.3-SNAPSHOT"
     id("com.palantir.git-version") version "0.11.0"
     id("com.matthewprenger.cursegradle") version "1.2.0"
 }
@@ -58,16 +58,16 @@ configurations {
 
 dependencies {
     minecraft("com.mojang:minecraft:$minecraftVersion")
-    mappings("net.fabricmc:yarn:$minecraftVersion+")
-    modCompile("net.fabricmc:fabric-loader:0.4.+")
+    mappings("net.fabricmc:yarn:$minecraftVersion+build.3")
+    modCompile("net.fabricmc:fabric-loader:0.4.8+")
 
-    modCompile("net.fabricmc.fabric-api:fabric-api:0.3.+")
+    modCompile("net.fabricmc.fabric-api:fabric-api:0.3.0+build.206")
 
-    modCompile("cloth-config:ClothConfig:0.2.1.14")
-    modCompile("me.sargunvohra.mcmods:auto-config:1.+")
+    modCompile("cloth-config:ClothConfig:0.2.4.17")
+    modCompile("me.sargunvohra.mcmods:auto-config:1.2.0+")
 
-    include("cloth-config:ClothConfig:0.2.1.14")
-    include("me.sargunvohra.mcmods:auto-config:1.+")
+    include("cloth-config:ClothConfig:0.2.4.17")
+    include("me.sargunvohra.mcmods:auto-config:1.2.0+")
 
     modCompile("io.github.prospector.modmenu:ModMenu:1.+")
 }
@@ -93,7 +93,7 @@ val jar = tasks.getByName<Jar>("jar") {
     from("LICENSE")
 }
 
-val remapJar = tasks.getByName<RemapJar>("remapJar")
+val remapJar = tasks.getByName<RemapJarTask>("remapJar")
 
 if (versionDetails().isCleanTag) {
 
@@ -108,19 +108,19 @@ if (versionDetails().isCleanTag) {
             releaseType = "release"
             addGameVersion(curseMinecraftVersion)
             relations(closureOf<CurseRelation> {
-                requiredDependency("fabric")
+                requiredDependency("fabric-api")
                 embeddedLibrary("cloth-config")
                 embeddedLibrary("auto-config")
             })
+            mainArtifact(file("${project.buildDir}/libs/${base.archivesBaseName}-$version.jar"))
+            afterEvaluate {
+                uploadTask.dependsOn(remapJar)
+            }
         })
 
         options(closureOf<Options> {
             forgeGradleIntegration = false
         })
-    }
-
-    afterEvaluate {
-        tasks.getByName("curseforge$curseProjectId").dependsOn(remapJar)
     }
 
 }
