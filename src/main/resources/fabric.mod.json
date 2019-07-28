@@ -30,7 +30,7 @@
     "mixins": [
         "iamverysmart.mixins.json"
     ],
-    "requires": {
+    "depends": {
         "fabricloader": ">=0.4.0",
         "fabric": ">=0.3.0",
         "autoconfig": ">=0.2.0"
