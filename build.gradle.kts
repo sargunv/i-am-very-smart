@@ -15,9 +15,9 @@ plugins {
     java
     idea
     `maven-publish`
-    id("fabric-loom") version "0.2.3-SNAPSHOT"
-    id("com.palantir.git-version") version "0.11.0"
-    id("com.matthewprenger.cursegradle") version "1.2.0"
+    id("fabric-loom") version "0.2.7-SNAPSHOT"
+    id("com.palantir.git-version") version "0.12.3"
+    id("com.matthewprenger.cursegradle") version "1.4.0"
 }
 
 java {
@@ -33,9 +33,6 @@ repositories {
     mavenCentral()
     jcenter()
     maven(url = "http://maven.fabricmc.net")
-    maven(url = "https://minecraft.curseforge.com/api/maven")
-    maven(url = "http://maven.sargunv.s3-website-us-west-2.amazonaws.com/")
-    maven(url = "https://maven.fabricmc.net/io/github/prospector/modmenu/ModMenu/")
 }
 
 val gitVersion: groovy.lang.Closure<Any> by extra
@@ -58,18 +55,18 @@ configurations {
 
 dependencies {
     minecraft("com.mojang:minecraft:$minecraftVersion")
-    mappings("net.fabricmc:yarn:$minecraftVersion+build.3")
-    modCompile("net.fabricmc:fabric-loader:0.4.8+")
+    mappings("net.fabricmc:yarn:$minecraftVersion+build.14:v2")
+    modImplementation("net.fabricmc:fabric-loader:0.8.2+build.194")
 
-    modCompile("net.fabricmc.fabric-api:fabric-api:0.3.0+build.206")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:0.5.1+build.294-1.15")
 
-    modCompile("cloth-config:ClothConfig:0.2.4.17")
-    modCompile("me.sargunvohra.mcmods:auto-config:1.2.0+")
+    modImplementation("me.shedaniel.cloth:config-2:2.12")
+    modImplementation("me.sargunvohra.mcmods:autoconfig1u:2.0")
 
-    include("cloth-config:ClothConfig:0.2.4.17")
-    include("me.sargunvohra.mcmods:auto-config:1.2.0+")
+    include("me.shedaniel.cloth:config-2:2.12")
+    include("me.sargunvohra.mcmods:autoconfig1u:2.0")
 
-    modCompile("io.github.prospector.modmenu:ModMenu:1.+")
+    modRuntime("io.github.prospector:modmenu:1.10.2+build.32")
 }
 
 val processResources = tasks.getByName<ProcessResources>("processResources") {
@@ -107,13 +104,15 @@ if (versionDetails().isCleanTag) {
             changelog = file("changelog.txt")
             releaseType = "release"
             addGameVersion(curseMinecraftVersion)
+            addGameVersion("Fabric")
             relations(closureOf<CurseRelation> {
                 requiredDependency("fabric-api")
                 embeddedLibrary("cloth-config")
-                embeddedLibrary("auto-config")
+                embeddedLibrary("auto-config-updated-api")
             })
             mainArtifact(file("${project.buildDir}/libs/${base.archivesBaseName}-$version.jar"))
             afterEvaluate {
+                mainArtifact(remapJar)
                 uploadTask.dependsOn(remapJar)
             }
         })

@@ -1,7 +1,7 @@
 package me.sargunvohra.mcmods.iamverysmart.config;
 
-import me.sargunvohra.mcmods.autoconfig1.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1.annotation.Config;
+import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
+import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 

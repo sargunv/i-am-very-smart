@@ -1,7 +1,7 @@
 package me.sargunvohra.mcmods.iamverysmart;
 
 import io.github.prospector.modmenu.api.ModMenuApi;
-import me.sargunvohra.mcmods.autoconfig1.AutoConfig;
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.iamverysmart.config.ClientConfig;
 import net.minecraft.client.gui.screen.Screen;
 
