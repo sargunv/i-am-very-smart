@@ -1,6 +1,6 @@
 package me.sargunvohra.mcmods.iamverysmart.match;
 
-import net.minecraft.util.Identifier;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +8,10 @@ import java.util.regex.Pattern;
 
 public class SingleMatcher {
 
-    private List<String> strings = new ArrayList<>();
-    private List<Pattern> patterns = new ArrayList<>();
+    private final List<String> strings = new ArrayList<>();
+    private final List<Pattern> patterns = new ArrayList<>();
 
-    MatchResult match(Identifier id) {
+    MatchResult match(ResourceLocation id) {
         String idStr = id.toString();
         for (String string : strings) {
             if (string.equals(idStr)) {

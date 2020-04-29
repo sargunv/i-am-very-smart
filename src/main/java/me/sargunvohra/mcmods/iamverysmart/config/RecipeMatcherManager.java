@@ -2,40 +2,40 @@ package me.sargunvohra.mcmods.iamverysmart.config;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import mcp.MethodsReturnNonnullByDefault;
 import me.sargunvohra.mcmods.iamverysmart.match.ComposedMatcher;
 import me.sargunvohra.mcmods.iamverysmart.match.SingleMatcher;
-import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
-import net.minecraft.resource.Resource;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.resources.ReloadListener;
+import net.minecraft.profiler.IProfiler;
+import net.minecraft.resources.IResource;
+import net.minecraft.resources.IResourceManager;
 import org.apache.logging.log4j.LogManager;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Objects;
 
-public class ReloadListener implements SimpleSynchronousResourceReloadListener {
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public class RecipeMatcherManager extends ReloadListener<ComposedMatcher> {
 
-    public static final ReloadListener INSTANCE = new ReloadListener();
+    public static final RecipeMatcherManager INSTANCE = new RecipeMatcherManager();
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
     private ComposedMatcher matcher = new ComposedMatcher(new SingleMatcher(), new SingleMatcher());
 
-    private ReloadListener() {
+    private RecipeMatcherManager() {
     }
 
-    @Override
-    public Identifier getFabricId() {
-        return new Identifier("iamverysmart", "reload_listener");
-    }
-
-    private SingleMatcher buildMatcher(ResourceManager resourceManager, String fileName) {
+    private SingleMatcher buildMatcher(IResourceManager resourceManager, String fileName) {
         SingleMatcher ret = new SingleMatcher();
         resourceManager
-            .findResources("iamverysmart", path -> path.endsWith(fileName)).stream()
+            .getAllResourceLocations("iamverysmart", path -> path.endsWith(fileName))
+            .stream()
             .map(resourceId -> {
-                Resource resource;
+                IResource resource;
                 try {
                     resource = resourceManager.getResource(resourceId);
                 } catch (IOException e) {
@@ -44,7 +44,8 @@ public class ReloadListener implements SimpleSynchronousResourceReloadListener {
                 }
                 return gson.<List<String>>fromJson(
                     new InputStreamReader(resource.getInputStream()),
-                    new TypeToken<List<String>>() {}.getType()
+                    new TypeToken<List<String>>() {
+                    }.getType()
                 );
             })
             .filter(Objects::nonNull)
@@ -53,12 +54,17 @@ public class ReloadListener implements SimpleSynchronousResourceReloadListener {
     }
 
     @Override
-    public void apply(ResourceManager resourceManager) {
-        matcher = new ComposedMatcher(
+    protected ComposedMatcher prepare(IResourceManager resourceManager, IProfiler profiler) {
+        return new ComposedMatcher(
             buildMatcher(resourceManager, "include_recipes.json"),
             buildMatcher(resourceManager, "exclude_recipes.json")
         );
+    }
+
+    @Override
+    protected void apply(ComposedMatcher matcher, IResourceManager resourceManager, IProfiler profiler) {
         LogManager.getLogger().info("Loaded {}", matcher);
+        this.matcher = matcher;
     }
 
     public ComposedMatcher getMatcher() {
