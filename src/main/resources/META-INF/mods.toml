@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[31,)"
+loaderVersion="[28,)"
 issueTrackerURL="https://gitlab.com/sargunv-mc-mods/i-am-very-smart/issues"
 
 [[mods]]
@@ -10,16 +10,16 @@ displayURL="https://minecraft.curseforge.com/projects/i-am-very-smart-forge"
 authors="sargunv"
 description="Unlock all recipes by default."
 
-[[dependencies.leveluphp]]
+[[dependencies.iamverysmart]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.15.2]"
+versionRange="[1.14.4]"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.leveluphp]]
+[[dependencies.iamverysmart]]
 modId="forge"
 mandatory=true
-versionRange="[31,)"
+versionRange="[28,)"
 ordering="NONE"
 side="BOTH"

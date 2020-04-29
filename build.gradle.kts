@@ -50,7 +50,7 @@ version = "2.1.0"
 group = modMavenGroup
 
 configure<MinecraftExtension> {
-    mappings("snapshot", "20200424-1.15.1")
+    mappings("snapshot", "20200119-1.14.4")
 
     runs {
         create("client")
@@ -74,7 +74,7 @@ configure<MinecraftExtension> {
 }
 
 dependencies {
-    "minecraft"("net.minecraftforge:forge:$minecraftVersion-31.1.47")
+    "minecraft"("net.minecraftforge:forge:$minecraftVersion-28.2.5")
 }
 
 val jar: Jar by tasks
