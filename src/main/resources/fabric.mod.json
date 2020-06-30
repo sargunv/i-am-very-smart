@@ -1,5 +1,4 @@
 {
-    "$schema": "https://gist.githubusercontent.com/MrYurihi/4460e90099cf934b2078c7607bb0562b/raw/3713076d9d16ad66ba00aad3fa525872ab3438af/mod.json",
     "schemaVersion": 1,
     "id": "iamverysmart",
     "version": "%VERSION%",
@@ -31,9 +30,9 @@
         "iamverysmart.mixins.json"
     ],
     "depends": {
-        "minecraft": "1.15.x",
+        "minecraft": "1.16.x",
         "fabricloader": ">=0.8.0",
-        "fabric": ">=0.5.0",
-        "autoconfig1u": ">=2.0.0"
+        "fabric": ">=0.14.0",
+        "autoconfig1u": ">=3.2.0-"
     }
 }

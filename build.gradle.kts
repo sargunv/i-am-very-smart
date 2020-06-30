@@ -1,22 +1,13 @@
 import com.matthewprenger.cursegradle.CurseProject
 import com.matthewprenger.cursegradle.CurseRelation
 import com.matthewprenger.cursegradle.Options
-import com.palantir.gradle.gitversion.VersionDetails
 import net.fabricmc.loom.task.RemapJarTask
-
-val minecraftVersion: String by project
-val curseProjectId: String by project
-val curseMinecraftVersion: String by project
-val basePackage: String by project
-val modJarBaseName: String by project
-val modMavenGroup: String by project
 
 plugins {
     java
     idea
     `maven-publish`
-    id("fabric-loom") version "0.2.7-SNAPSHOT"
-    id("com.palantir.git-version") version "0.12.3"
+    id("fabric-loom") version "0.4-SNAPSHOT"
     id("com.matthewprenger.cursegradle") version "1.4.0"
 }
 
@@ -26,7 +17,7 @@ java {
 }
 
 base {
-    archivesBaseName = modJarBaseName
+    archivesBaseName = "i-am-very-smart"
 }
 
 repositories {
@@ -35,38 +26,28 @@ repositories {
     maven(url = "http://maven.fabricmc.net")
 }
 
-val gitVersion: groovy.lang.Closure<Any> by extra
-val versionDetails: groovy.lang.Closure<VersionDetails> by extra
-
-version = "${gitVersion()}+mc$minecraftVersion"
-group = modMavenGroup
+version = "2.1.0+mc1.16.1"
+group = "me.sargunvohra.mcmods"
 
 minecraft {
 }
 
-configurations {
-    listOf(mappings, modCompile, include, compileOnly).forEach {
-        it {
-            resolutionStrategy.activateDependencyLocking()
-        }
-    }
-}
-
-
 dependencies {
-    minecraft("com.mojang:minecraft:$minecraftVersion")
-    mappings("net.fabricmc:yarn:$minecraftVersion+build.14:v2")
-    modImplementation("net.fabricmc:fabric-loader:0.8.2+build.194")
+    minecraft("com.mojang:minecraft:1.16.1")
+    mappings("net.fabricmc:yarn:1.16.1+build.18:v2")
+    modImplementation("net.fabricmc:fabric-loader:0.8.8+build.202")
 
-    modImplementation("net.fabricmc.fabric-api:fabric-api:0.5.1+build.294-1.15")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:0.14.0+build.371-1.16")
 
-    modImplementation("me.shedaniel.cloth:config-2:2.12")
-    modImplementation("me.sargunvohra.mcmods:autoconfig1u:2.0")
+    listOf(
+        "me.shedaniel.cloth:config-2:4.5.6",
+        "me.sargunvohra.mcmods:autoconfig1u:3.2.0-unstable"
+    ).forEach {
+        modImplementation(it)
+        include(it)
+    }
 
-    include("me.shedaniel.cloth:config-2:2.12")
-    include("me.sargunvohra.mcmods:autoconfig1u:2.0")
-
-    modRuntime("io.github.prospector:modmenu:1.10.2+build.32")
+    modCompile("io.github.prospector:modmenu:1.12.2+build.17")
 }
 
 val processResources = tasks.getByName<ProcessResources>("processResources") {
@@ -92,34 +73,29 @@ val jar = tasks.getByName<Jar>("jar") {
 
 val remapJar = tasks.getByName<RemapJarTask>("remapJar")
 
-if (versionDetails().isCleanTag) {
-
-    curseforge {
-        if (project.hasProperty("curseforge_api_key")) {
-            apiKey = project.property("curseforge_api_key")!!
-        }
-
-        project(closureOf<CurseProject> {
-            id = curseProjectId
-            changelog = file("changelog.txt")
-            releaseType = "release"
-            addGameVersion(curseMinecraftVersion)
-            addGameVersion("Fabric")
-            relations(closureOf<CurseRelation> {
-                requiredDependency("fabric-api")
-                embeddedLibrary("cloth-config")
-                embeddedLibrary("auto-config-updated-api")
-            })
-            mainArtifact(file("${project.buildDir}/libs/${base.archivesBaseName}-$version.jar"))
-            afterEvaluate {
-                mainArtifact(remapJar)
-                uploadTask.dependsOn(remapJar)
-            }
-        })
-
-        options(closureOf<Options> {
-            forgeGradleIntegration = false
-        })
+curseforge {
+    if (project.hasProperty("curseforge_api_key")) {
+        apiKey = project.property("curseforge_api_key")!!
     }
 
+    project(closureOf<CurseProject> {
+        id = "318163"
+        releaseType = "release"
+        addGameVersion("1.16.1")
+        addGameVersion("Fabric")
+        relations(closureOf<CurseRelation> {
+            requiredDependency("fabric-api")
+            embeddedLibrary("cloth-config")
+            embeddedLibrary("auto-config-updated-api")
+        })
+        mainArtifact(file("${project.buildDir}/libs/${base.archivesBaseName}-$version.jar"))
+        afterEvaluate {
+            mainArtifact(remapJar)
+            uploadTask.dependsOn(remapJar)
+        }
+    })
+
+    options(closureOf<Options> {
+        forgeGradleIntegration = false
+    })
 }
