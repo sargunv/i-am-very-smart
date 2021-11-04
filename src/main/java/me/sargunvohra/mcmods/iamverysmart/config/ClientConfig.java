@@ -1,13 +1,14 @@
 package me.sargunvohra.mcmods.iamverysmart.config;
 
-import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
+import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
-@Config(name = "iamverysmart")
+@Config(name = "i-am-very-smart")
 public class ClientConfig implements ConfigData {
-    public boolean suppressTutorialNotification = true;
-    public boolean suppressRecipeNotification = true;
+
+  public boolean suppressTutorialNotification = true;
+  public boolean suppressRecipeNotification = true;
 }

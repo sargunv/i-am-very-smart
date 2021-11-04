@@ -1,0 +1,6 @@
+{
+  "text.autoconfig.i-am-very-smart.title": "我真聪明",
+  "text.autoconfig.i-am-very-smart.category.default": "常规",
+  "text.autoconfig.i-am-very-smart.option.suppressTutorialNotification": "阻止教程通知",
+  "text.autoconfig.i-am-very-smart.option.suppressRecipeNotification": "阻止合成解锁通知"
+}

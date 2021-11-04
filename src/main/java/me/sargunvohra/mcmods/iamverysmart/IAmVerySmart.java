@@ -3,12 +3,18 @@ package me.sargunvohra.mcmods.iamverysmart;
 import me.sargunvohra.mcmods.iamverysmart.config.ReloadListener;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.resource.ResourceType;
+import net.minecraft.server.packs.PackType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@SuppressWarnings("unused")
 public class IAmVerySmart implements ModInitializer {
-    @Override
-    public void onInitialize() {
-        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(ReloadListener.INSTANCE);
-    }
+
+  public static final Logger LOGGER = LogManager.getLogger(IAmVerySmart.class);
+
+  @Override
+  public void onInitialize() {
+    ResourceManagerHelper
+      .get(PackType.SERVER_DATA)
+      .registerReloadListener(ReloadListener.INSTANCE);
+  }
 }

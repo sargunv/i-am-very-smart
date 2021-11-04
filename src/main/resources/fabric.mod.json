@@ -1,38 +1,28 @@
 {
-    "schemaVersion": 1,
-    "id": "iamverysmart",
-    "version": "%VERSION%",
-    "name": "I Am Very Smart",
-    "description": "Disable tutorial hints and unlock all recipes.",
-    "authors": [
-        "sargunv"
-    ],
-    "contact": {
-        "homepage": "https://minecraft.curseforge.com/projects/i-am-very-smart",
-        "sources": "https://gitlab.com/sargunv-mc-mods/i-am-very-smart",
-        "issues": "https://gitlab.com/sargunv-mc-mods/i-am-very-smart/issues"
-    },
-    "license": "Apache-2.0",
-    "icon": "assets/iamverysmart/icon.png",
-    "environment": "*",
-    "entrypoints": {
-        "main": [
-            "me.sargunvohra.mcmods.iamverysmart.IAmVerySmart"
-        ],
-        "client": [
-            "me.sargunvohra.mcmods.iamverysmart.IAmVerySmartClient"
-        ],
-        "modmenu": [
-            "me.sargunvohra.mcmods.iamverysmart.ModMenuCompat"
-        ]
-    },
-    "mixins": [
-        "iamverysmart.mixins.json"
-    ],
-    "depends": {
-        "minecraft": "1.16.x",
-        "fabricloader": ">=0.8.0",
-        "fabric": ">=0.14.0",
-        "autoconfig1u": ">=3.2.0-"
-    }
+  "schemaVersion": 1,
+  "id": "i-am-very-smart",
+  "version": "${modVersion}",
+  "name": "I Am Very Smart",
+  "description": "Disable tutorial hints and unlock all recipes.",
+  "authors": ["sargunv"],
+  "contact": {
+    "homepage": "https://minecraft.curseforge.com/projects/${curseForgeSlug}",
+    "sources": "https://github.com/${githubRepo}",
+    "issues": "https://github.com/${githubRepo}/issues"
+  },
+  "license": "Apache-2.0",
+  "icon": "assets/i-am-very-smart/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["me.sargunvohra.mcmods.iamverysmart.IAmVerySmart"],
+    "client": ["me.sargunvohra.mcmods.iamverysmart.IAmVerySmartClient"],
+    "modmenu": ["me.sargunvohra.mcmods.iamverysmart.IAmVerySmartModMenu"]
+  },
+  "mixins": ["i-am-very-smart.mixins.json"],
+  "depends": {
+    "minecraft": "~${minecraftVersion}",
+    "fabricloader": ">=${loaderVersion}",
+    "fabric": ">=${fabricVersion}",
+    "cloth-config2": ">=${clothConfigVersion}"
+  }
 }
