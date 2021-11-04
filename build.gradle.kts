@@ -179,7 +179,7 @@ if (project.hasProperty("curseforge_token")) {
           relations(
               closureOf<CurseRelation> {
                 requiredDependency("fabric-api")
-                requiredDependency("cloth-config")
+                embeddedLibrary("cloth-config")
               })
           mainArtifact(remapJar.archiveFile)
           afterEvaluate { uploadTask.dependsOn(remapJar) }
