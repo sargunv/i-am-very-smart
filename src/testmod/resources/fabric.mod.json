@@ -5,8 +5,6 @@
   "environment": "*",
   "entrypoints": {
     "fabric-gametest": [
-      "me.sargunvohra.mcmods.alwaysdroploot.test.AlwaysDropXpTests",
-      "me.sargunvohra.mcmods.alwaysdroploot.test.LootDropModeTests"
     ]
   }
 }
